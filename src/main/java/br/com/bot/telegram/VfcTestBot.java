@@ -8,7 +8,21 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 public class VfcTestBot extends TelegramLongPollingBot {
 
 	public void onUpdateReceived(Update update) {
-		//esse método pode ser utilizado para validar o email digitado pelo cliente no primeiro acesso ao canal
+		String comando = update.getMessage().getText();
+		SendMessage msg = new SendMessage();
+		
+		if(comando.contentEquals("teste")) {
+			msg.setText("Seja bem vindo!");
+		} else {
+			msg.setText("Seus dados não foram encontrados!");
+		}
+		
+        try {
+            execute(msg);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+		
 	}
 
 	public String getBotUsername() {
